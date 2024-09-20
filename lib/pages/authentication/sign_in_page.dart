@@ -41,23 +41,11 @@ class SignInPage extends StatelessWidget {
                           ?.copyWith(fontWeight: FontWeight.bold),
                     ),
                     gapH24,
-                    Text(
-                      'Sign up with Open account',
-                      style: Theme.of(context)
-                          .textTheme
-                          .titleSmall
-                          ?.copyWith(fontWeight: FontWeight.bold),
-                    ),
-                    gapH24,
-                    SocialLoginButton(
-                      onGoogleLoginPressed: () {},
-                      onAppleLoginPressed: () {},
-                    ),
-                    gapH24,
+
                     const Divider(),
                     gapH24,
                     Text(
-                      'Or continue with email address',
+                      'Continue with email address',
                       style: Theme.of(context)
                           .textTheme
                           .titleSmall
@@ -120,27 +108,7 @@ class SignInPage extends StatelessWidget {
                     ),
                     gapH24,
 
-                    /// SIGNUP TEXT
-                    Row(
-                      children: [
-                        Text(
-                          'Don’t have an account?',
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyMedium
-                              ?.copyWith(color: AppColors.textGrey),
-                        ),
-                        TextButton(
-                          style: TextButton.styleFrom(
-                            textStyle: const TextStyle(
-                              color: AppColors.titleLight,
-                            ),
-                          ),
-                          onPressed: () => context.go('/register'),
-                          child: const Text('Sign up'),
-                        ),
-                      ],
-                    ),
+
                   ],
                 ),
               ),
