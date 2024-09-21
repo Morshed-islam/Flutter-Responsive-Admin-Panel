@@ -1,5 +1,6 @@
 import 'package:core_dashboard/pages/authentication/register_page.dart';
 import 'package:core_dashboard/pages/authentication/sign_in_page.dart';
+import 'package:core_dashboard/pages/dashboard/dashboard_page.dart';
 import 'package:core_dashboard/pages/entry_point.dart';
 import 'package:go_router/go_router.dart';
 
@@ -8,7 +9,7 @@ final routerConfig = GoRouter(
   routes: [
     GoRoute(
       path: '/',
-      builder: (context, state) => const EntryPoint(),
+      builder: (context, state) => const SignInPage(),
     ),
     GoRoute(
       path: '/sign-in',
@@ -18,11 +19,14 @@ final routerConfig = GoRouter(
       path: '/register',
       builder: (context, state) => const RegisterPage(),
     ),
-    // GoRoute(
-    //   path: '/entry-point',
-    //   builder: (context, state) => const EntryPoint(),
-    // ),
-
+    GoRoute(
+      path: '/entry-point',
+      builder: (context, state) => const EntryPoint(),
+    ),
+    GoRoute(
+      path: '/dashboard',
+      builder: (context, state) => const DashboardPage(),
+    ),
     // GoRoute(
     //   path: '/forgot-password',
     //   builder: (context, state) => const ForgotPasswordScreen(),

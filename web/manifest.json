@@ -1,6 +1,6 @@
 {
-    "name": "core_dashboard",
-    "short_name": "core_dashboard",
+    "name": "jobapplyserviceadminpanel",
+    "short_name": "jobapplyserviceadminpanel",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

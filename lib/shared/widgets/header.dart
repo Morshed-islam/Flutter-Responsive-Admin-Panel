@@ -1,8 +1,11 @@
 import 'package:core_dashboard/responsive.dart';
+import 'package:core_dashboard/shared/constants/routes_name.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
+import '../../providers/auth_provider.dart';
 import '../../theme/app_colors.dart';
 import '../constants/defaults.dart';
 import '../constants/ghaps.dart';
@@ -14,6 +17,8 @@ class Header extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final authService = Provider.of<AuthProvider>(context, listen: false);
+
     return Container(
       padding: const EdgeInsets.symmetric(
           horizontal: AppDefaults.padding, vertical: AppDefaults.padding),
@@ -42,6 +47,7 @@ class Header extends StatelessWidget {
                   child: SvgPicture.asset("assets/icons/search_filled.svg"),
                 ),
               ),
+
             if (!Responsive.isMobile(context))
               Expanded(
                 flex: 1,
@@ -67,39 +73,13 @@ class Header extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  if (!Responsive.isMobile(context))
-                    IconButton(
-                      onPressed: () {},
-                      icon: Badge(
-                        isLabelVisible: true,
-                        child:
-                            SvgPicture.asset("assets/icons/message_light.svg"),
-                      ),
-                    ),
-                  if (!Responsive.isMobile(context)) gapW16,
-                  if (!Responsive.isMobile(context))
-                    IconButton(
-                      onPressed: () {},
-                      icon: Badge(
-                        isLabelVisible: true,
-                        child: SvgPicture.asset(
-                            "assets/icons/notification_light.svg"),
-                      ),
-                    ),
-                  if (!Responsive.isMobile(context)) gapW16,
-                  if (!Responsive.isMobile(context))
-                    IconButton(
-                      onPressed: () {},
-                      icon: const CircleAvatar(
-                        backgroundImage: NetworkImage(
-                            "https://cdn.create.vista.com/api/media/small/339818716/stock-photo-doubtful-hispanic-man-looking-with-disbelief-expression"),
-                      ),
-                    ),
+
+                  authService.user == null ?
                   TextButton(
-                    onPressed: () => context.go('/sign-in'),
+                    onPressed: () => Navigator.pushNamed(context, RouteNames.signInRoute),
                     style: TextButton.styleFrom(
                       foregroundColor:
-                          Theme.of(context).textTheme.titleLarge!.color,
+                      Theme.of(context).textTheme.titleLarge!.color,
                       minimumSize: const Size(80, 56),
                       shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(
@@ -111,12 +91,34 @@ class Header extends StatelessWidget {
                       ),
                     ),
                     child: const Text("Sign In"),
+                  ): TextButton(
+                    onPressed: (){},
+                    style: TextButton.styleFrom(
+                      foregroundColor:
+                      Theme.of(context).textTheme.titleLarge!.color,
+                      minimumSize: const Size(80, 56),
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(AppDefaults.borderRadius),
+                        ),
+                      ),
+                      textStyle: const TextStyle(
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    child: const Text("Log out"),
                   ),
-                  gapW16,
-                  ElevatedButton(
-                    onPressed: () => context.go('/register'),
-                    child: const Text("Sign Up"),
-                  ),
+                  if (!Responsive.isMobile(context)) gapW16,
+                  if (!Responsive.isMobile(context))
+                    IconButton(
+                      onPressed: () {},
+                      icon: const CircleAvatar(
+                        backgroundImage: NetworkImage(
+                            "https://cdn.create.vista.com/api/media/small/339818716/stock-photo-doubtful-hispanic-man-looking-with-disbelief-expression"),
+                      ),
+                    ),
+
+
                 ],
               ),
             ),

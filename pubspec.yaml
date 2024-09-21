@@ -13,6 +13,13 @@ dependencies:
   flutter_svg: ^2.0.10+1
   go_router: ^14.1.1
   google_fonts: ^6.2.1
+  firebase_core:
+  firebase_auth:
+  provider:
+  shared_preferences:
+  cloud_firestore:
+  intl:
+  date_time_format:
 
 dev_dependencies:
   flutter_test:

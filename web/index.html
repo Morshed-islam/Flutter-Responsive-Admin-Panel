@@ -1,46 +1,88 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!--
-    If you are serving your web app in a path other than the root, change the
-    href value below to reflect the base path you are serving from.
+    <!--
+      If you are serving your web app in a path other than the root, change the
+      href value below to reflect the base path you are serving from.
 
-    The path provided below has to start and end with a slash "/" in order for
-    it to work correctly.
+      The path provided below has to start and end with a slash "/" in order for
+      it to work correctly.
 
-    For more details:
-    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+      For more details:
+      * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
 
-    This is a placeholder for base href that will be replaced by the value of
-    the `--base-href` argument provided to `flutter build`.
-  -->
-  <base href="$FLUTTER_BASE_HREF">
+      This is a placeholder for base href that will be replaced by the value ofz
+      the `--base-href` argument provided to `flutter build`.
+    -->
+    <base href="$FLUTTER_BASE_HREF">
 
-  <meta charset="UTF-8">
-  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="A new Flutter project.">
+    <meta charset="UTF-8">
+    <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+    <meta name="description" content="A new Flutter project.">
 
-  <!-- iOS meta tags & icons -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="core_dashboard">
-  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+    <!-- iOS meta tags & icons -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="responsive_web_app">
+    <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png"/>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon.png"/>
 
-  <title>core_dashboard</title>
-  <link rel="manifest" href="manifest.json">
+    <title>Jobs</title>
+    <link rel="manifest" href="manifest.json">
 
-  <script>
-    // The value below is injected by flutter build, do not touch.
-    const serviceWorkerVersion = null;
-  </script>
-  <!-- This script adds the flutter initialization JS code -->
-  <script src="flutter.js" defer></script>
+    <script src="https://www.gstatic.com/firebasejs/9.1.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.1.2/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.1.2/firebase-auth.js"></script>
+    <script src="firebase.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+    <script>
+        // The value below is injected by flutter build, do not touch.
+        var serviceWorkerVersion = null;
+    </script>
+    <!-- This script adds the flutter initialization JS code -->
+    <script src="flutter.js" defer></script>
 </head>
 <body>
-  <script>
+
+<!-- Preloader -->
+<!--<div class="preloader">-->
+<!--  <div class="preloader-container">-->
+<!--    &lt;!&ndash; <img width="80" class="preloader-img" src="assets/img/preloader.png" alt=""> &ndash;&gt;-->
+<!--    <div id="animation-container">-->
+<!--      <img width="80" src="icons/1.png" class="animation-image" alt="" />-->
+<!--      <img width="80" src="icons/2.png" class="animation-image" alt="" />-->
+<!--      <img width="80" src="icons/3.png" class="animation-image" alt="" />-->
+<!--      <img width="80" src="icons/4.png" class="animation-image" alt="" />-->
+<!--      <img width="80" src="icons/5.png" class="animation-image" alt="" />-->
+<!--    </div>-->
+<!--    <div class="loader"></div>-->
+<!--  </div>-->
+<!--</div>-->
+
+
+<!--<script>-->
+<!--  document.addEventListener("DOMContentLoaded", function () {-->
+<!--  var images = document.querySelectorAll(".animation-image");-->
+<!--  var currentIndex = 0;-->
+<!--  function cycleImages() {-->
+<!--      var currentImage = images[currentIndex];-->
+<!--      var nextIndex = (currentIndex + 1) % images.length;-->
+<!--      var nextImage = images[nextIndex];-->
+<!--      currentImage.style.display = "none";-->
+<!--      nextImage.style.display = "block";-->
+<!--      currentIndex = nextIndex;-->
+<!--  }-->
+<!--  // Set an interval to call the cycleImages function every 3 seconds-->
+<!--  setInterval(cycleImages, 250);-->
+<!--  });-->
+<!--</script>-->
+
+<!--<script src="main.dart.js"></script>-->
+<script>
     window.addEventListener('load', function(ev) {
       // Download main.dart.js
       _flutter.loader.loadEntrypoint({
@@ -54,6 +96,70 @@
         }
       });
     });
-  </script>
+</script>
+
 </body>
 </html>
+
+<!--
+<!DOCTYPE html>
+<html>
+<head>
+    &lt;!&ndash;
+      If you are serving your web app in a path other than the root, change the
+      href value below to reflect the base path you are serving from.
+
+      The path provided below has to start and end with a slash "/" in order for
+      it to work correctly.
+
+      For more details:
+      * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+
+      This is a placeholder for base href that will be replaced by the value of
+      the `&#45;&#45;base-href` argument provided to `flutter build`.
+    &ndash;&gt;
+    <base href="$FLUTTER_BASE_HREF">
+
+    <meta charset="UTF-8">
+    <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+    <meta name="description" content="A new Flutter project.">
+
+    &lt;!&ndash; iOS meta tags & icons &ndash;&gt;
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="jobapplyserviceadminpanel">
+    <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+    &lt;!&ndash; Favicon &ndash;&gt;
+    <link rel="icon" type="image/png" href="favicon.png"/>
+
+    <title>jobapplyserviceadminpanel</title>
+    <link rel="manifest" href="manifest.json">
+
+    &lt;!&ndash;    <script src="https://www.gstatic.com/firebasejs/9.1.2/firebase-app.js"></script>&ndash;&gt;
+    &lt;!&ndash;    <script src="https://www.gstatic.com/firebasejs/9.1.2/firebase-firestore.js"></script>&ndash;&gt;
+    &lt;!&ndash;    <script src="https://www.gstatic.com/firebasejs/9.1.2/firebase-auth.js"></script>&ndash;&gt;
+    &lt;!&ndash;  <script src="firebase.js"></script>&ndash;&gt;
+
+    &lt;!&ndash;    <script>&ndash;&gt;
+    &lt;!&ndash;        // Replace with your actual Firebase configuration&ndash;&gt;
+    &lt;!&ndash;       const firebaseConfig = {&ndash;&gt;
+    &lt;!&ndash;      apiKey: "AIzaSyCx0AdlE-XHio_owRXpPZ6yxy8w4UKuXh4",&ndash;&gt;
+    &lt;!&ndash;      authDomain: "jobapplyservicebd-1bda4.firebaseapp.com",&ndash;&gt;
+    &lt;!&ndash;      projectId: "jobapplyservicebd-1bda4",&ndash;&gt;
+    &lt;!&ndash;      storageBucket: "jobapplyservicebd-1bda4.appspot.com",&ndash;&gt;
+    &lt;!&ndash;      messagingSenderId: "890086279190",&ndash;&gt;
+    &lt;!&ndash;      appId: "1:890086279190:web:bddf43c0d69f5c5888cd37",&ndash;&gt;
+    &lt;!&ndash;      measurementId: "G-9VYM65PJR7"&ndash;&gt;
+    &lt;!&ndash;    };&ndash;&gt;
+
+    &lt;!&ndash;        // Initialize Firebase&ndash;&gt;
+    &lt;!&ndash;        firebase.initializeApp(firebaseConfig);&ndash;&gt;
+    &lt;!&ndash;    </script>&ndash;&gt;
+
+</head>
+<body>
+<script src="flutter_bootstrap.js" async></script>
+</body>
+</html>
+-->

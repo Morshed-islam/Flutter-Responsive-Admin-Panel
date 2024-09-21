@@ -1,19 +1,50 @@
-import 'package:core_dashboard/shared/constants/config.dart';
-import 'package:core_dashboard/shared/constants/defaults.dart';
-import 'package:core_dashboard/shared/constants/extensions.dart';
-import 'package:core_dashboard/shared/constants/ghaps.dart';
-import 'package:core_dashboard/theme/app_colors.dart';
+import 'dart:developer';
+
+import 'package:core_dashboard/pages/authentication/register_page.dart';
+import 'package:core_dashboard/pages/dashboard/dashboard_page.dart';
+import 'package:core_dashboard/providers/auth_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
-import 'widgets/social_login_button.dart';
+import 'package:core_dashboard/shared/constants/config.dart';
+import 'package:core_dashboard/shared/constants/defaults.dart';
+import 'package:core_dashboard/shared/constants/ghaps.dart';
 
-class SignInPage extends StatelessWidget {
+import '../../shared/constants/routes_name.dart';
+import '../entry_point.dart';
+
+class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
 
   @override
+  State<SignInPage> createState() => _SignInPageState();
+}
+
+class _SignInPageState extends State<SignInPage> {
+  final TextEditingController _emailController = TextEditingController(text: "admin@gmail.com");
+  final TextEditingController _passwordController = TextEditingController(text: "11111111");
+  String? _errorMessage;
+
+  @override
+  void initState() {
+    super.initState();
+    _checkIfUserIsLoggedIn();
+  }
+
+  void _checkIfUserIsLoggedIn() async {
+    final authService = Provider.of<AuthProvider>(context, listen: false);
+    if (authService.user != null) {
+      // If user is already authenticated, navigate to the home page
+      Navigator.pushNamed(context, RouteNames.entryPoint);
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final authService = Provider.of<AuthProvider>(context);
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -35,26 +66,20 @@ class SignInPage extends StatelessWidget {
                     ),
                     Text(
                       'Sign In',
-                      style: Theme.of(context)
-                          .textTheme
-                          .headlineLarge
-                          ?.copyWith(fontWeight: FontWeight.bold),
+                      style: Theme.of(context).textTheme.headlineLarge?.copyWith(fontWeight: FontWeight.bold),
                     ),
                     gapH24,
-
                     const Divider(),
                     gapH24,
                     Text(
                       'Continue with email address',
-                      style: Theme.of(context)
-                          .textTheme
-                          .titleSmall
-                          ?.copyWith(fontWeight: FontWeight.bold),
+                      style: Theme.of(context).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.bold),
                     ),
                     gapH16,
 
                     /// EMAIL TEXT FIELD
                     TextFormField(
+                      controller: _emailController,
                       keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
                         prefixIcon: SvgPicture.asset(
@@ -63,13 +88,6 @@ class SignInPage extends StatelessWidget {
                           width: 20,
                           fit: BoxFit.none,
                         ),
-                        suffixIcon: SvgPicture.asset(
-                          'assets/icons/check_filled.svg',
-                          width: 17,
-                          height: 11,
-                          fit: BoxFit.none,
-                          colorFilter: AppColors.success.toColorFilter,
-                        ),
                         hintText: 'Your email',
                       ),
                     ),
@@ -77,6 +95,7 @@ class SignInPage extends StatelessWidget {
 
                     /// PASSWORD TEXT FIELD
                     TextFormField(
+                      controller: _passwordController,
                       keyboardType: TextInputType.visiblePassword,
                       obscureText: true,
                       decoration: InputDecoration(
@@ -95,10 +114,32 @@ class SignInPage extends StatelessWidget {
                     SizedBox(
                       width: 296,
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () async {
+                          log("clicked");
+                          try {
+                            await authService.signInWithEmail(
+                              _emailController.text,
+                              _passwordController.text,
+                            );
+                            if (authService.user != null) {
+                              // If sign-in is successful, navigate to the home page
+                              Navigator.pushReplacementNamed(context, RouteNames.entryPoint);
+                            }
+                          } catch (e) {
+                            setState(() {
+                              _errorMessage = e.toString();
+                            });
+                          }
+                        },
                         child: const Text('Sign in'),
                       ),
                     ),
+                    gapH16,
+                    if (_errorMessage != null)
+                      Text(
+                        _errorMessage!,
+                        style: TextStyle(color: Colors.red),
+                      ),
                     gapH24,
 
                     /// FOOTER TEXT
@@ -107,8 +148,6 @@ class SignInPage extends StatelessWidget {
                       style: Theme.of(context).textTheme.bodySmall,
                     ),
                     gapH24,
-
-
                   ],
                 ),
               ),

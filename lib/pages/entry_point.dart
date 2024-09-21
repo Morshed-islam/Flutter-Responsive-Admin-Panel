@@ -1,3 +1,5 @@
+import 'package:core_dashboard/pages/all_jobs/all_jobs_page.dart';
+import 'package:core_dashboard/pages/authentication/sign_in_page.dart';
 import 'package:core_dashboard/responsive.dart';
 import 'package:core_dashboard/shared/constants/defaults.dart';
 import 'package:core_dashboard/shared/widgets/sidemenu/sidebar.dart';
@@ -16,11 +18,11 @@ class EntryPoint extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _drawerKey,
-      drawer: Responsive.isMobile(context) ? const Sidebar() : null,
+      drawer: Responsive.isDesktop(context) ? const Sidebar() : null,
       body: Row(
         children: [
           if (Responsive.isDesktop(context)) const Sidebar(),
-          if (Responsive.isTablet(context)) const TabSidebar(),
+          // if (Responsive.isTablet(context)) const TabSidebar(),
           Expanded(
             child: Column(
               children: [
@@ -32,10 +34,9 @@ class EntryPoint extends StatelessWidget {
                       children: [
                         Padding(
                           padding: EdgeInsets.symmetric(
-                            horizontal: AppDefaults.padding *
-                                (Responsive.isMobile(context) ? 1 : 1.5),
+                            horizontal: AppDefaults.padding * (Responsive.isMobile(context) ? 1 : 1.5),
                           ),
-                          child: SafeArea(child: DashboardPage()),
+                          child: const SafeArea(child: AllJobsPage()),
                         ),
                       ],
                     ),

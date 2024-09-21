@@ -21,10 +21,7 @@ class DashboardPage extends StatelessWidget {
         if (!Responsive.isMobile(context)) gapH24,
         Text(
           "Dashboard",
-          style: Theme.of(context)
-              .textTheme
-              .headlineLarge!
-              .copyWith(fontWeight: FontWeight.w600),
+          style: Theme.of(context).textTheme.headlineLarge!.copyWith(fontWeight: FontWeight.w600),
         ),
         gapH20,
         Row(
