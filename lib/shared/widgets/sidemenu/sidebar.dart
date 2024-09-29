@@ -91,7 +91,9 @@ class _SidebarState extends State<Sidebar> {
                       title: "Add job post",
                       activeIconSrc: "assets/icons/home_filled.svg",
                       inactiveIconSrc: "assets/icons/home_light.svg",
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(context, RouteNames.addJobRoute);
+                      },
                     ),
 
                     // Customers

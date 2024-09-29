@@ -1,6 +1,8 @@
+import 'package:core_dashboard/pages/add_job_post/add_job_post.dart';
 import 'package:core_dashboard/pages/authentication/sign_in_page.dart';
 import 'package:core_dashboard/pages/edit_job/edit_job_post.dart';
 import 'package:core_dashboard/pages/entry_point.dart';
+import 'package:core_dashboard/providers/add_job_post_provider.dart';
 import 'package:core_dashboard/providers/auth_provider.dart';
 import 'package:core_dashboard/providers/job_provider.dart';
 import 'package:core_dashboard/shared/constants/routes_name.dart';
@@ -12,6 +14,7 @@ import 'package:provider/provider.dart';
 
 Future<void> main() async{
   WidgetsFlutterBinding.ensureInitialized();
+
   await Firebase.initializeApp(options: const FirebaseOptions(
       apiKey: "AIzaSyCx0AdlE-XHio_owRXpPZ6yxy8w4UKuXh4",
       authDomain: "jobapplyservicebd-1bda4.firebaseapp.com",
@@ -25,6 +28,7 @@ Future<void> main() async{
       providers: [
         ChangeNotifierProvider(create: (_) => AuthProvider()),
         ChangeNotifierProvider(create: (_) => JobProvider()),
+        ChangeNotifierProvider(create: (_) => AddJobProvider()),
       ],
       child: const MainApp()));
 }
@@ -53,6 +57,7 @@ class MainApp extends StatelessWidget {
       routes: {
         RouteNames.initialRoute : (context) => const SignInPage(),
         RouteNames.entryPoint : (context) => const EntryPoint(),
+        RouteNames.addJobRoute : (context) => const AddJobPage(),
         // RouteNames.editPageRoute : (context) =>  EditJobPage(id: ),
       },
     );
